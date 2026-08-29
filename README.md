@@ -1,6 +1,6 @@
-# Herbal Companion — legal
+# Herbalist's Companion — legal
 
-Public hosting for the Herbal Companion privacy policy. This repository exists
+Public hosting for the Herbalist's Companion privacy policy. This repository exists
 for one reason: **Google Play requires a publicly reachable HTTPS URL for the
 policy, and the app's own repository is private**, so GitHub Pages cannot serve
 it from there.
