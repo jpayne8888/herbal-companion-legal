@@ -26,7 +26,7 @@
 <body>
 
 <h1>Herbalist's Companion — Privacy Policy</h1>
-<p class="updated">Effective date: August 29, 2026</p>
+<p class="updated">Effective date: September 12, 2026</p>
 
 <p>
   Herbalist's Companion ("the app", "we", "us") is a herbal formula-building app.
@@ -38,14 +38,65 @@
 <p>We collect only what's needed to provide the app's core features:</p>
 <ul>
   <li><strong>Email address</strong> — collected when you create an account, used to sign you in and to let you reset your password.</li>
-  <li><strong>Basic profile info from Google, if you use "Continue with Google"</strong> — your name, email address, and profile photo, as provided by Google's sign-in service. We use this only to create and identify your account.</li>
-  <li><strong>Formula data you create</strong> — the herb formulas, notes, and preparation details you build and choose to save. This is only stored if you're signed in and tap Save.</li>
+  <li><strong>Your email address from Google, if you use "Continue with Google"</strong> — as provided by Google's sign-in service. We ask Google for nothing else, and we use it only to create and identify your account.</li>
+  <li><strong>Formula data you create</strong> — the herb formulas, notes, and preparation details you build and choose to save. This is only stored with your account if you're signed in and tap Save; signed out, it stays on your device.</li>
+  <li><strong>Your notes on herbs</strong> — if you sign in, the marks you make on a herb (read, kept) and the note you write about it are stored with your account. Signed out, they stay on your device and we never see them.</li>
+  <li><strong>Feedback you send from Settings</strong> — the message and its category. If you are signed in it is filed under your account; if not, it carries no identity at all.</li>
+  <li><strong>Formulas you choose to publish</strong> — see "Shared formulas" below for exactly what a published formula contains, who can see it, and how to take it back.</li>
 </ul>
 <p>
   We do <strong>not</strong> collect your location, contacts, camera/photos,
   device advertising ID, or any analytics/usage tracking. The app contains
   no third-party advertising or analytics SDKs as of this policy's effective
-  date.
+  date. Two capabilities are built into the app but switched off in this
+  release — photo upload and subscriptions — and the services behind them
+  are named under "Third parties" below so that nothing in the app is
+  undisclosed; this policy will be updated before either is switched on.
+</p>
+
+<h2>Shared formulas</h2>
+<p>
+  You can choose to publish a formula so that other people can open it.
+  Nothing is published unless you tap Publish, and the screen shows you
+  exactly what will become visible before you confirm. A published formula
+  contains: its name and preparation type, the herbs with their roles and
+  proportions, the computed energetic, taste and action profile, any tags,
+  the words you write for it (why you are sharing it, its flavour, what it
+  is for, how to serve it), the notes you wrote on the formula — shown to you
+  in full on the publish screen before you confirm, so you can edit them
+  first — and a display name you choose, which may be left blank to publish
+  anonymously. The notes are your own free text and are published only when
+  you choose to share the formula. A published formula never contains your
+  herb notebook, your email address or your account identity.
+</p>
+<p>
+  <strong>Who can see it.</strong> At present a published formula opens for
+  anyone who has its link and the app. The app also has a community
+  section, the Commons, where published formulas are listed for every reader
+  to find; it is not yet open. When it opens, formulas that are published at
+  that time are listed there, and the publish screen tells you this before
+  you confirm. You can unpublish a formula at any time from your Library,
+  after which its link no longer opens it and it is not listed.
+</p>
+<p>
+  <strong>Demonstration links.</strong> A formula published before
+  12 September 2026 may carry a link to a video of the preparation that its
+  maker had posted on TikTok, YouTube, Instagram or Vimeo; the publish screen
+  no longer offers this. Where such a link exists we store the address and
+  nothing else. The app does not contact those services on your behalf or on
+  a reader's; a reader who taps the link leaves the app and is then subject
+  to that service's own privacy policy.
+</p>
+<p>
+  <strong>Reports and removal.</strong> Every published formula carries a
+  Report button. Reports are read only by us, never by the person reported,
+  and are reviewed by a person. A formula that is unsafe, unlawful, abusive,
+  misleading about what a herb will do, or otherwise not what the app is for
+  is hidden from everyone while it is reviewed and removed if the report is
+  upheld; the account that published it is warned, and repeated or serious
+  cases lead to the account being closed. There is no automated moderation
+  and no third-party moderation service. If you believe something of yours
+  was removed in error, contact us at the address below.
 </p>
 
 <h2>How we use your information</h2>
@@ -95,9 +146,27 @@
   </li>
   <li>
     <strong>Google Sign-In</strong> — only if you choose "Continue with
-    Google". Google tells us your name, email address and profile photo, and
-    Google knows that you signed in to this app. We send Google nothing else.
+    Google". Google tells us your email address, and Google knows that you
+    signed in to this app. We ask Google for nothing else and send it nothing
+    else.
     (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a>)
+  </li>
+  <li>
+    <strong>Google ML Kit face detection</strong> — built in, switched off in
+    this release. When photo upload is enabled, it runs on your device to
+    check a photo you attach for a human face and refuse it if one is found;
+    the photo itself never leaves your device for that check. Google states
+    that the library may report usage metrics to Google when it runs. It does
+    not run while photo upload is off.
+    (<a href="https://developers.google.com/ml-kit/terms" target="_blank" rel="noopener">terms</a>)
+  </li>
+  <li>
+    <strong>RevenueCat</strong> — built in, switched off in this release.
+    When subscriptions are offered, it handles the purchase through Google
+    Play and receives an app-generated identifier for your account and your
+    purchase state; it never receives your email address. It is not contacted
+    while subscriptions are off.
+    (<a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">privacy policy</a>)
   </li>
   <li>
     <strong>Expo (EAS Update)</strong> — the app checks for a software update
