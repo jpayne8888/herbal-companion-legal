@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Get Herbalist's Companion</title>
+<!--
+  The QR code on a shared recipe card points here (from 1.2.1). An image cannot
+  know which phone will scan it, so this page sends each one to its own store
+  before anything is drawn: an iPhone or iPad to the App Store, an Android
+  phone to Google Play. A computer, or a browser with scripts off, sees both
+  links. Nothing is loaded from anywhere else and nothing is recorded.
+-->
+<script>
+  (function () {
+    var ua = navigator.userAgent || '';
+    var apple = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var android = /Android/.test(ua);
+    var to = apple ? 'https://apps.apple.com/app/id6822974517'
+           : android ? 'https://play.google.com/store/apps/details?id=org.penumbral.herbalistscompanion'
+           : null;
+    if (to) location.replace(to);
+  })();
+</script>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+    line-height: 1.6;
+    color: #2a2a26;
+    background: #FBF8F2;
+    text-align: center;
+  }
+  h1 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  p { color: #706b5e; }
+  .stores { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+  .stores a {
+    display: block; padding: 0.85rem 1rem; border: 1px solid #ddd6c4; border-radius: 6px;
+    color: #2a2a26; text-decoration: none; font-weight: 600; background: #fff;
+  }
+  .stores a:focus-visible, .stores a:hover { border-color: #3A7A50; }
+</style>
+</head>
+<body>
+  <h1>Herbalist's Companion</h1>
+  <p>A materia medica and formula bench, for iPhone, iPad and Android.</p>
+  <div class="stores">
+    <a href="https://apps.apple.com/app/id6822974517">App Store</a>
+    <a href="https://play.google.com/store/apps/details?id=org.penumbral.herbalistscompanion">Google Play</a>
+  </div>
+</body>
+</html>
