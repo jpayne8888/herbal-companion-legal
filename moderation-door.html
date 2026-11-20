@@ -1,0 +1,39 @@
+<!doctype html>
+<!--
+  The door to the moderation page (supabase/functions/moderation/index.ts).
+  Hosted with the legal pages, bookmarked as
+  .../moderation-door.html#t=<MODERATION_TOKEN>. The token is in the
+  fragment, which a browser never sends to any server, so the host serving
+  this file never sees it; the script below posts it to the function, whose
+  POST answer Supabase serves as HTML. This file holds no data and no secret.
+  Its script is pinned by the hash in the CSP; tests/moderationPage.test.ts
+  recomputes it, and .gitattributes keeps the file's line endings fixed.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-u0bfs8LPq+j0kn5gZppze+k6DYsW0ExNbs9uPfh03h8='; style-src 'unsafe-inline'; form-action https://jmipbvijmtupauajtcod.supabase.co; base-uri 'none'">
+<title>Moderation</title>
+<style>
+:root { color-scheme: light dark; }
+body { margin: 0; padding: 16px; font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f7f5f0; color: #1d1d1b; }
+@media (prefers-color-scheme: dark) { body { background: #151513; color: #ecebe6; } }
+button { padding: 8px 12px; font: inherit; }
+</style>
+</head>
+<body>
+<form id="f" method="post" action="https://jmipbvijmtupauajtcod.supabase.co/functions/v1/moderation">
+<input type="hidden" name="t" id="t">
+<button type="submit">Open moderation</button>
+</form>
+<p id="none" hidden>This page opens from its bookmark.</p>
+<script>
+var m = /^#t=([A-Za-z0-9_-]{32,})$/.exec(location.hash)
+if (m) { document.getElementById('t').value = m[1]; document.getElementById('f').submit() }
+else { document.getElementById('f').hidden = true; document.getElementById('none').hidden = false }
+</script>
+</body>
+</html>
