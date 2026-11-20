@@ -29,7 +29,7 @@
 <p class="updated">Effective date: November 20, 2026</p>
 
 <p>
-  Herbalist's Companion ("the app", "we", "us") is a herbal formula-building app.
+  Herbalist's Companion ("the app", "we", "us") is an herbal formula-building app.
   This policy explains what information the app collects, how it's used,
   and how you can control or delete it.
 </p>
@@ -94,6 +94,37 @@
   formula, or when you delete your account.
 </p>
 <p>
+  <strong>Checking shared photos.</strong> When you choose or take a photo
+  for a shared formula, and again after it is uploaded unless it was already
+  checked as you chose it, and before anyone but you can see it, our server
+  sends it to
+  <a href="https://cloud.google.com/vision" target="_blank" rel="noopener">Google Cloud Vision</a>,
+  a service that checks it on our behalf for sexual, violent or otherwise
+  explicit content and for a human face. The photo is sent to Google only for
+  that check. Google's terms for this service say that the photo is
+  processed in memory and not stored, that Google does not use it to train or
+  improve its products, and that Google keeps a temporary log of some details
+  about each request (not the photo) to run the service and prevent abuse
+  (<a href="https://cloud.google.com/vision/docs/data-usage" target="_blank" rel="noopener">Cloud Vision data usage</a>).
+  The face check only asks whether a face is present. It does not recognize
+  or identify anyone, and we keep nothing about any face: no measurements,
+  no outline, no score. We keep Google's answer on explicit content and, if
+  a photo is refused, the reason. When a photo passes as you choose it, we
+  keep a short fingerprint of it for a day: a code worked out from the photo,
+  which cannot be turned back into it, and not the photo itself. It lets the
+  same photo pass after upload without being sent to Google a second time.
+  A photo refused as you choose it is not kept by us at all and is not added
+  to your formula; one refused after upload is deleted and taken off your
+  formula. Either way the app tells you so. Until the check passes, a photo
+  is visible to you alone.
+</p>
+<p>
+  <strong>The terms you accept.</strong> The first time you publish a
+  formula, the app shows the rules for shared formulas and asks you to agree
+  to them. We keep a record that your account agreed, which version of the
+  terms it was, and when, so we do not ask again until the terms change.
+</p>
+<p>
   <strong>Who can see it.</strong> At present a published formula can be
   found by anyone using the app: the Discover tab searches every published
   formula by the herbs in it, and anyone who has a formula's link can open it
@@ -122,11 +153,25 @@
   be suspended, which stops it signing in and publishing, and repeated or
   serious cases lead to the account being closed. We also look over newly
   published formulas and their photos ourselves, without waiting for a
-  report, and remove any that break these rules. Apart from the face check
-  your own phone makes before a photo is added (described above), there is
-  no automated moderation and no third-party moderation service. If you
+  report, and remove any that break these rules. Every shared photo is also
+  checked automatically before anyone else can see it, on your phone for
+  faces and by Google Cloud Vision for explicit content and faces (both
+  described above); there is no other automated moderation. If you
   believe something of yours was removed in error, contact us at the address
   below.
+</p>
+<p>
+  <strong>Hiding a formula or a maker.</strong> You can hide a published
+  formula, or hide its maker so that none of their formulas appear for you.
+  The maker is not told. A hidden formula is remembered on your device only.
+  If you are signed in, the makers you hide are kept with your account, so
+  that their formulas are left out before they reach your device, and that
+  list entry is deleted when you show the maker again or delete your account.
+  If you are signed out, the makers you hide are remembered on your device
+  only. Each time a signed-in reader hides a maker we also keep a record of
+  it by account number (the maker's and the reader's, with the time, and
+  nothing else), so that we can see when several readers hide the same maker.
+  That record is kept after the maker is shown again.
 </p>
 
 <h2>How we use your information</h2>
@@ -172,7 +217,8 @@
 
 <h2>Third parties the app communicates with</h2>
 <p>
-  These are every external service the app contacts. There are no others, and
+  These are every external service the app contacts, and the one our server
+  contacts with your content (Google Cloud Vision). There are no others, and
   there is no advertising, analytics or crash-reporting SDK in the app.
 </p>
 <ul>
@@ -181,6 +227,13 @@
     acting as our processor. Receives everything listed under "Information we
     collect" above, because it is where that information is stored. It does not use your data for its own purposes.
     (<a href="https://supabase.com/privacy" target="_blank" rel="noopener">privacy policy</a>)
+  </li>
+  <li>
+    <strong>Google Cloud Vision</strong>: contacted by our server, not by
+    the app, and only for photos you add to a formula you publish. It
+    receives each such photo to check it, as described under "Checking shared
+    photos" above, acting on our behalf.
+    (<a href="https://cloud.google.com/vision/docs/data-usage" target="_blank" rel="noopener">data usage</a>)
   </li>
   <li>
     <strong>Google Sign-In</strong> — only if you choose "Continue with
@@ -275,7 +328,8 @@
 
 <h2>Children's privacy</h2>
 <p>
-  Herbalist's Companion is made for adults. It is not directed at children
+  Herbalist's Companion is made for adults, and you must be 18 or older to
+  use it. It is not directed at children
   under 13, and we do not knowingly collect personal information from
   children under 13. If you
   believe a child has provided us with personal information, contact us
