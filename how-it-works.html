@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Herbalist's Companion works</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+    line-height: 1.6;
+    color: #2a2a26;
+    background: #FBF8F2;
+  }
+  h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
+  .updated { color: #706b5e; font-size: 0.9rem; margin-bottom: 2rem; }
+  h2 { font-size: 1.2rem; margin-top: 2.2rem; border-bottom: 1px solid #ddd6c4; padding-bottom: 0.3rem; }
+  h3 { font-size: 1.05rem; margin-top: 1.6rem; }
+  a { color: #3A7A50; }
+  ul { padding-left: 1.3rem; }
+</style>
+</head>
+<body>
+
+<h1>How Herbalist's Companion works</h1>
+<p class="updated">Updated November 20, 2026</p>
+
+<p>
+  Herbalist's Companion is an herb guide and a bench for building herbal
+  formulas, for Android, iPhone, and iPad. The guide holds fifty herbs, each
+  with its traditional uses, energetics, tastes, actions, and cautions. On the
+  bench, herbs are placed in four roles (Lead, Support, Synergizer, and
+  Driver), and the app reads the blend as it grows. This page says how it is built and how shared formulas are kept safe, with engineering notes after the overview.
+</p>
+
+<h2>What it is made of</h2>
+<p>
+  The app is written in React Native, which builds one app that runs natively
+  on both Android and iOS, with Expo, a set of tools for building, signing,
+  and updating React Native apps. Supabase, a hosted service built on the
+  Postgres database, holds the accounts and the saved formulas.
+</p>
+<p>
+  The herb guide is kept on the phone once it has loaded, so it can be read
+  without a connection. The reading of a formula (its warmth and moisture, its
+  flavor, the actions it covers, and the cautions its herbs carry) is worked
+  out on the phone as each herb goes onto the bench. A formula stays on the
+  phone until it is saved, and saving needs an account. A saved formula can
+  be read or changed only by its own account, unless its maker publishes it. The app contains no advertising, analytics, or crash-reporting SDKs.
+</p>
+
+<h2>How sharing is kept safe</h2>
+<p>
+  Nothing is published until its maker taps Publish, and publishing needs an
+  account. Before a first share, the app shows the rules for shared formulas
+  and asks for agreement to the <a href="terms.html">terms of use</a>. A
+  shared photo is hidden from everyone else until it passes an automatic
+  check, first on the phone and then on the server. A refused photo is not
+  kept. Any signed-in reader can report a formula, and a person reads every
+  report. Any reader can hide a formula or its maker. An account can be
+  deleted from Settings, and everything saved to it goes with it. The
+  <a href="privacy.html">privacy policy</a> says in full what is collected and
+  why.
+</p>
+
+<h2>Engineering notes</h2>
+
+<h3>The rules live in the database</h3>
+<p>
+  Who may read or write a saved formula is decided by rules in the database
+  itself, not by the app. Anything can send a request to the server, so a check made only in the app would hold only for the app. With the
+  rules in the database, a saved formula is readable and writable by its own
+  account and no other, whatever sends the request. They are tested the way an attacker would meet them: a suite starts a real local copy of the database, signs in as two accounts and as a visitor with none, and tries what each should and should not be able to do.
+</p>
+
+<h3>Shared photos are hidden until they pass</h3>
+<p>
+  A photo on a shared formula is invisible to everyone but its maker until it
+  has passed its check. Showing a photo at once and removing it later would leave a window in which anyone could see it. The check
+  runs in two places. On the phone, the face detection built into the phone's
+  own operating system looks for a face, and the photo is not sent anywhere
+  for that. On the server, the photo goes to Google Cloud Vision, a Google
+  service that reads images, which checks it for explicit content and for a
+  human face. The face check does not recognize anyone, and nothing about a face is kept.
+</p>
+<p>
+  The check fails closed. A photo the phone cannot check is not added, and a
+  photo the server has not passed stays hidden. The server checks every
+  waiting photo on its own, so an app that never asks for a check still
+  cannot make a photo visible.
+</p>
+
+<h3>The phone does the arithmetic</h3>
+<p>
+  The formula reading is computed on the phone, in plain functions with no
+  network in them. The bench answers as each herb lands, with no wait for a
+  server, and a formula in progress is never sent anywhere. The herb guide is
+  stored on the phone after its first load and read from there when there is
+  no connection.
+</p>
+
+<h3>Signed updates</h3>
+<p>
+  The app is built to take small fixes between store releases as updates. Each build
+  carries a certificate and refuses any update its matching private key did
+  not sign, and that key is kept outside the code. An update server that was
+  taken over, or a network that tampered with the download, could not get the app to run code that key did not sign.
+</p>
+
+<h3>No third-party SDKs for ads, analytics, or crashes</h3>
+<p>
+  The app does no analytics or usage tracking. That costs the usual
+  instruments: there is no dashboard of what readers tap and no automatic
+  crash report. Faults are found by tests and by what people send through the feedback form. In return, the privacy policy can
+  name every service the app talks to, and the list is short.
+</p>
+
+<h3>Release discipline</h3>
+<p>
+  Store builds come from a release branch cut from the main line of work, and
+  that branch takes only fixes to what it ships. Before an Android build may
+  be uploaded to the store, a script opens it and checks the file itself rather
+  than the settings that produced it. It confirms that the build runs on real phones and not only the emulator, carries the right version and the release signature, was built from the current code, accepts only signed updates, asks for no hardware it does not need, and finds every database change it expects already on the server.
+</p>
+
+<h3>Tests</h3>
+<p>
+  There are three layers. About 1,600 tests cover the pure logic. About 800 render interface
+  components and check what they draw and do. About 300 more, in twenty
+  suites, run against a live local database and exercise its rules as real
+  signed-in users. A new test is expected to fail first: the code it guards is
+  broken on purpose, the test is seen to go red, and the code is put back. A
+  test that passes either way guards nothing.
+</p>
+
+<h3>The interface</h3>
+<p>
+  Every icon in the app, from the tab marks to the traditional symbols, is
+  drawn as vector paths. Symbol characters and emoji render differently from
+  one phone's fonts to the next, and some render as an empty box. The paper
+  the app appears to be printed on is one image laid full screen behind
+  everything, and its texture is held to a share of the contrast between the
+  page and a card, so it never reads as a card. Botanical plates on the herb pages are shown whole, since a crop removes the root and the flowering head a plate is drawn to show. Type follows the
+  reader's chosen size through four steps. No meaning rests on color alone:
+  wherever color says something, a word or a position says it too, so the app
+  reads the same to a color-deficient eye.
+</p>
+
+<h3>What was wrong, and what replaced it</h3>
+<ul>
+  <li>The paper ground was first a small texture repeated across the screen. In all three versions tried, any mark in the texture became a pattern at a fixed spacing. One image the size of the screen has nothing to repeat.</li>
+  <li>The server checked shared photos only after Publish, so an unsuitable
+    photo sat in the editor looking accepted until the end. The check now
+    runs the moment a photo is chosen, without holding up the screen, and a
+    photo that passes then is not sent to be checked again after upload.</li>
+  <li>An early Android build held native code for the emulator only. It would
+    have installed on no real phone, and every check that day ran on an
+    emulator, where it worked. The release script came from that.</li>
+</ul>
+
+<h2>More</h2>
+<ul>
+  <li><a href="privacy.html">Privacy policy</a></li>
+  <li><a href="delete-data.html">Delete your data</a></li>
+  <li><a href="terms.html">Terms of use</a></li>
+  <li><a href="support.html">Support</a></li>
+</ul>
+
+<p class="updated">
+  Designed and built by Jared Payne.<br>
+  Herbalist's Companion is operated by Broken Diamond P Ranch LLC.
+</p>
+
+</body>
+</html>
